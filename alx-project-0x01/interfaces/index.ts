@@ -40,3 +40,14 @@ export interface UserModalProps {
   onSubmit: (user: Omit<UserData, 'id'>) => void;
 }
 
+export interface UserProps {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+  phone: string;
+  website: string;
+  company: Company;
+}
+

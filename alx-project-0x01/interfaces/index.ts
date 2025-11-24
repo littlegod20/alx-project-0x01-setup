@@ -49,7 +49,7 @@ export interface UserData {
 
 export interface UserModalProps {
   onClose: () => void;
-  onSubmit: (user: Omit<UserData, 'id'>) => void;
+  onSubmit: (post: UserProps) => void;
 }
 
 export interface UserProps {

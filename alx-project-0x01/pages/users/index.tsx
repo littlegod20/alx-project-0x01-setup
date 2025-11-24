@@ -8,8 +8,8 @@ const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
 
-  const handleAddUser = (newUser: Omit<UserData, "id">) => {
-    const newUserWithId = { ...newUser, id: users.length + 1 };
+  const handleAddUser = (post: UserProps) => {
+    const newUserWithId = { ...post, id: users.length + 1 };
     setUser(newUserWithId);
     console.log("New user added:", newUserWithId);
   };

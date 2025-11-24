@@ -1,13 +1,32 @@
 import Header from "@/components/layout/Header";
 import UserCard from "@/components/common/UserCard";
-import { UserProps } from "@/interfaces";
+import UserModal from "@/components/common/UserModal";
+import { UserProps, UserData } from "@/interfaces";
+import { useState } from "react";
 
 const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [user, setUser] = useState<UserData | null>(null);
+
+  const handleAddUser = (newUser: Omit<UserData, "id">) => {
+    const newUserWithId = { ...newUser, id: users.length + 1 };
+    setUser(newUserWithId);
+    console.log("New user added:", newUserWithId);
+  };
+
   return (
     <div className="flex flex-col h-screen">
       <Header />
       <main className="p-4">
-        <h1 className="text-2xl font-semibold mb-6">User Content</h1>
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-semibold mb-6">User Content</h1>
+          <button
+            onClick={() => setModalOpen(true)}
+            className="bg-blue-700 px-4 py-2 rounded-full text-white"
+          >
+            Add User
+          </button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {users.map((user: UserProps) => (
             <UserCard
@@ -24,6 +43,13 @@ const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
           ))}
         </div>
       </main>
+
+      {isModalOpen && (
+        <UserModal
+          onClose={() => setModalOpen(false)}
+          onSubmit={handleAddUser}
+        />
+      )}
     </div>
   );
 };
